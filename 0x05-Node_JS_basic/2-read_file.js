@@ -3,7 +3,7 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const students = data.trim().split('\n').slice(1); // remove header and empty lines
+    const students = data.trim().split('\n').slice(1);
     const fields = {};
 
     students.forEach((student) => {
