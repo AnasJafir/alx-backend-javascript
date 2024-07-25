@@ -12,6 +12,9 @@ describe('calculateNumber', function() {
     it('should return -4 when inputs are 1.4 and 4.5', function() {
       assert.strictEqual(calculateNumber('SUBTRACT', 1.4, 4.5), -4);
     });
+    it('should return 2 when inputs are 4.9 and 2.7', function() {
+      assert.strictEqual(calculateNumber('SUBTRACT', 4.9, 2.7), 2);
+    });
   });
 
   describe('DIVIDE', function() {
@@ -24,4 +27,3 @@ describe('calculateNumber', function() {
     });
   });
 });
-
