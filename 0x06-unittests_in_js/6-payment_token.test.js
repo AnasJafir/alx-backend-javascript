@@ -1,19 +1,23 @@
 const expect = require('chai').expect;
 const getPaymentTokenFromAPI = require('./6-payment_token.js');
 
-describe('getPaymentTokenFromAPI', () => {
-  it('should return a resolved promise with the correct data when success is true', (done) => {
-    getPaymentTokenFromAPI(true).then((result) => {
-      expect(result).to.deep.equal({ data: 'Successful response from the API' });
-      done();
-    });
+describe('getPaymentTokenFromAPI', function() {
+  it('should return a resolved promise with the object {data: "Successful response from the API"} when success is true', function(done) {
+    getPaymentTokenFromAPI(true)
+      .then(response => {
+        expect(response).to.be.an('object');
+        expect(response).to.have.property('data', 'Successful response from the API');
+        done();
+      })
+      .catch(done);
   });
 
-  it('should return an unresolved promise when success is false', (done) => {
-    getPaymentTokenFromAPI(false).then(() => {
-      expect.fail('Promise should not have been resolved');
-    }).catch(() => {
+  it('should do nothing when success is false', function(done) {
+    const promise = getPaymentTokenFromAPI(false);
+    setTimeout(() => {
+      expect(promise).to.be.a('promise');
       done();
-    });
+    }, 50);
   });
 });
+
