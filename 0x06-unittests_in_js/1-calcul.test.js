@@ -26,4 +26,11 @@ describe('calculateNumber', function() {
       assert.strictEqual(calculateNumber('DIVIDE', 1.4, 0), 'Error');
     });
   });
+   describe('Invalid Type', function() {
+    it('should throw an error when type is invalid', function() {
+      assert.throws(() => {
+        calculateNumber('INVALID', 1.4, 4.5);
+      }, Error, 'Invalid type');
+    });
+   });
 });
