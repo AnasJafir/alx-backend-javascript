@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+/* eslint-disable */
 const fs = require('fs');
 
 const countStudents = (path) => {
