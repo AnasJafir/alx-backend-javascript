@@ -1,11 +1,14 @@
-import { AppController } from '../controllers/AppController';
-import { StudentsController } from '../controllers/StudentsController';
-
+/* eslint-disable import/no-unresolved */
 const express = require('express');
+const AppController = require('../controllers/AppController');
+const StudentsController = require('../controllers/StudentsController');
+
 const router = express.Router();
 
 router.get('/', AppController.getHomepage);
 
-router.get('/students/:major?', StudentsController.getAllStudents);
+router.get('/students', StudentsController.getAllStudents);
 
-export default router;
+router.get('/students/:major', StudentsController.getAllStudentsByMajor);
+
+module.exports = router;

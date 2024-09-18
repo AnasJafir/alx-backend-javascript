@@ -1,26 +1,26 @@
-import fs from 'fs';
+const { readFile } = require('fs');
 
-// eslint-disable-next-line import/prefer-default-export
-export const readDatabase = (filePath) => new Promise((resolve, reject) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      reject(err);
-    } else {
-      const lines = data.trim().split('\n');
-      const fields = {};
-      lines.forEach((line, index) => {
-        if (index === 0) {
-          // Skip the header line
-          return;
+module.exports = function readDatabase(filePath) {
+  const students = {};
+  return new Promise((resolve, reject) => {
+    readFile(filePath, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        const lines = data.toString().split('\n');
+        const noHeader = lines.slice(1);
+        for (let i = 0; i < noHeader.length; i += 1) {
+          if (noHeader[i]) {
+            const field = noHeader[i].toString().split(',');
+            if (Object.prototype.hasOwnProperty.call(students, field[3])) {
+              students[field[3]].push(field[0]);
+            } else {
+              students[field[3]] = [field[0]];
+            }
+          }
         }
-        // eslint-disable-next-line no-unused-vars
-        const [firstName, lastName, age, field] = line.split(',');
-        if (!fields[field]) {
-          fields[field] = [];
-        }
-        fields[field].push(`${firstName} ${lastName}`);
-      });
-      resolve(fields);
-    }
+        resolve(students);
+      }
+    });
   });
-});
+};

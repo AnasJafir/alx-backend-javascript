@@ -1,14 +1,15 @@
-/* eslint-disable no-undef */
-import router from './routes';
-
+/* eslint-disable import/no-unresolved */
 const express = require('express');
+
+const router = require('./routes/index');
+
 const app = express();
+const port = 1245;
 
 app.use('/', router);
+app.use('/students', router);
+app.use('/students/:major', router);
 
-const port = 1245;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+app.listen(port);
 
 export default app;
