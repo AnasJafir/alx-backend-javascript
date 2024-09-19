@@ -1,5 +1,4 @@
-/* eslint-disable */
-const fs = require('fs');
+const fs = require('node:fs');
 
 const countStudents = (path) => {
   try {
